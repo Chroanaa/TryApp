@@ -19,7 +19,7 @@ function Home() {
           Rent the perfect van to make your perfect road trip.
         </div>
         <button className="absolute left-1/2 top-96 transform -translate-x-1/2 text-primary text-5xl m-5 mt-72 bg-orange w-5/6 rounded-xl p-5 font-bold hover:bg-opacity-50">
-          Find your van
+          <Link to="vans">Explore our vans </Link>
         </button>
       </section>
     </div>

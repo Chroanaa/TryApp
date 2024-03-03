@@ -8,8 +8,12 @@ function Header() {
   };
   return (
     <header>
-      <nav className="flex flex-row justify-between bg-header p-4">
-        <h1 className="self-center font-sans text-2xl font-bold">#VANLIFE</h1>
+      <nav className="flex flex-row justify-between bg-main p-4 ">
+        <h1 className="self-center font-sans text-2xl font-bold">
+          <NavLink to="/" style={currentLink}>
+            #VANLIFE
+          </NavLink>
+        </h1>
         <div className="flex gap-10 m-4  ">
           <NavLink
             to="/about"
@@ -19,7 +23,7 @@ function Header() {
             About
           </NavLink>
           <NavLink
-            to="/"
+            to="/vans"
             style={currentLink}
             className="underline decoration-white transition-colors duration-500 hover:decoration-blue underline-offset-4 decoration-2"
           >

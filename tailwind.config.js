@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {},
     colors: {
-      header: "#fff7ed",
+      main: "#fff7ed",
       black: "#000000",
       orange: "#FF8C38",
       white: "rgba(255, 255, 255, 0)",
@@ -24,6 +24,11 @@ export default {
     },
     fontWeight: {
       bold: 900,
+      semiBold: 600,
+    },
+    fontSize: {
+      vs: "0.6rem",
+      large: "2rem",
     },
   },
   plugins: [],
