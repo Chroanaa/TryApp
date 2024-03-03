@@ -7,7 +7,7 @@ function About() {
       <div className="flex justify-center">
         <img className="w-[800px] h-[400px] " src={AboutImage} alt="" />
       </div>
-      <div className="text-center text-2xl mt-4 font-bold mb-5">
+      <div className="text-center text-large mt-4 font-bold mb-5">
         Don’t squeeze in a sedan when you could relax in a van.
       </div>
       <div className="grid place-items-center">

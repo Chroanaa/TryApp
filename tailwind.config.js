@@ -29,6 +29,7 @@ export default {
     fontSize: {
       vs: "0.6rem",
       large: "2rem",
+      veryLarge: "3rem",
     },
   },
   plugins: [],

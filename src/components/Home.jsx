@@ -11,10 +11,10 @@ function Home() {
           <img src={HomeImage} alt="" className="w-full h-mainPageSize " />
           <div className="absolute inset-0 bg-black opacity-50"></div>
         </div>
-        <div className="absolute left-32 top-44 text-primary text-8xl font-bold m-5 ">
+        <div className="absolute left-32 top-44 text-primary text-veryLarge font-bold m-5 ">
           You got the travel plans, we got the travel vans.
         </div>
-        <div className="absolute left-32 top-96 text-primary text-5xl m-5 mt-20">
+        <div className="absolute left-32 top-96 text-primary text-veryLarge m-5 mt-20">
           Add adventure to your life by joining the #vanlife movement. <br />
           Rent the perfect van to make your perfect road trip.
         </div>
