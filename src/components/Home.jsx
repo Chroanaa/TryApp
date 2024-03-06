@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import HomeImage from "../assets/HomeImage.png";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -18,9 +18,13 @@ function Home() {
           Add adventure to your life by joining the #vanlife movement. <br />
           Rent the perfect van to make your perfect road trip.
         </div>
-        <button className="absolute left-1/2 top-96 transform -translate-x-1/2 text-primary text-5xl m-5 mt-72 bg-orange w-5/6 rounded-xl p-5 font-bold hover:bg-opacity-50">
-          <Link to="vans">Explore our vans </Link>
-        </button>
+
+        <NavLink
+          to="/vans"
+          className="absolute left-1/2 top-96 transform -translate-x-1/2 text-primary text-5xl m-5 mt-72 text-center bg-orange w-5/6 rounded-xl p-5 font-bold hover:bg-opacity-50"
+        >
+          Explore our vans
+        </NavLink>
       </section>
     </div>
   );

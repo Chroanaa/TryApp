@@ -118,7 +118,7 @@ function Vans() {
       <main className="bg-main p-4">
         <div>
           <h1 className="m-5 font-bold text-large">Explore our vans options</h1>
-          <div className="grid grid-cols-2 place-items-center gap-1">
+          <div className="grid grid-cols-2 place-items-center gap-10">
             {vans.map((van) => {
               return (
                 <Card
@@ -127,6 +127,7 @@ function Vans() {
                   price={van.price}
                   imageUrl={van.imageUrl}
                   type={van.type}
+                  id={van.id}
                 />
               );
             })}

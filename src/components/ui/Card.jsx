@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Card(props) {
   let typeColor = "";
@@ -35,6 +36,9 @@ function Card(props) {
       >
         <p className="text-center">{props.type}</p>
       </div>
+      <NavLink to={`/vans/${props.id}`} className="text-center">
+        View Details
+      </NavLink>
     </div>
   );
 }
