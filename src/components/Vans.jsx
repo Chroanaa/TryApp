@@ -118,7 +118,7 @@ function Vans() {
       <main className="bg-main p-4">
         <div>
           <h1 className="m-5 font-bold text-large">Explore our vans options</h1>
-          <div className="grid grid-cols-2 place-items-center gap-10">
+          <div className="grid grid-cols-2 place-items-center gap-20">
             {vans.map((van) => {
               return (
                 <Card

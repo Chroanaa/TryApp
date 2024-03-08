@@ -18,6 +18,7 @@ export default {
       primary: "white",
       secondary: "black",
       red: "#FF8C38",
+      blue: "blue",
     },
     height: {
       mainPageSize: "900px",
