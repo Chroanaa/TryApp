@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { createServer, Model } from "miragejs";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 function VanDetails() {
   createServer({
@@ -112,11 +113,27 @@ function VanDetails() {
   }, [param.id]);
 
   return (
-    <div>
+    <div
+      aria-label={`Details of the ${vanDetails.name} with the price of ${vanDetails.price}`}
+      className="bg-main"
+    >
+      <NavLink
+        to={"/vans"}
+        className="flex flex-row underline decoration-white ml-12 transition-all hover:decoration-blue hover:scale-105 underline-offset-4 decoration-2"
+      >
+        <FaArrowLeftLong className="self-center transition-all mr-2" />
+        Back to vans
+      </NavLink>
+
       <h1>this is the id: {param.id}</h1>
-      <img src={param.img} alt="" />
       <h2>{vanDetails.name}</h2>
-      <img src={vanDetails.imageUrl} alt="" />
+      <img
+        src={vanDetails.imageUrl}
+        alt={`This is the image of ${vanDetails.name}`}
+      />
+      <h3>${vanDetails.price}</h3>
+      <p>{vanDetails.description}</p>
+      <p>{vanDetails.type}</p>
     </div>
   );
 }
