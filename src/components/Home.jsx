@@ -1,8 +1,7 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import HomeImage from "../assets/HomeImage.png";
-import Footer from "./Footer";
-import Header from "./Header";
+
 function Home() {
   return (
     <div>

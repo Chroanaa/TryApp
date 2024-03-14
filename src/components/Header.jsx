@@ -14,7 +14,15 @@ function Header() {
             #VANLIFE
           </NavLink>
         </h1>
+
         <div className="flex gap-10 m-4  ">
+          <NavLink
+            to="/host"
+            style={currentLink}
+            className="underline decoration-white transition-colors duration-500 hover:decoration-blue underline-offset-4 decoration-2"
+          >
+            Host
+          </NavLink>
           <NavLink
             to="/about"
             className="underline decoration-white transition-colors duration-500 hover:decoration-blue underline-offset-4 decoration-2"

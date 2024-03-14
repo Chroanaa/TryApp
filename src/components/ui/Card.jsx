@@ -35,7 +35,7 @@ function Card(props) {
         </p>
         <span className="text-right text-vs m-0">/day </span>
         <div
-          className="max-w-20 p-1 rounded text-[#FFCC8D] font-semiBold"
+          className="max-w-20 p-1 rounded text-[#FFCC8D] font-semiBold "
           style={styles}
         >
           <p className="text-center">{props.type}</p>

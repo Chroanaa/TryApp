@@ -1,10 +1,6 @@
 import { createServer, Model } from "miragejs";
-export default async function fetchVans(Vans) {
-  const response = await fetch("/api/vans");
-  const data = await response.json();
-  Vans = data.vans;
-}
-createServer({
+
+let server = createServer({
   models: {
     vans: Model,
   },
