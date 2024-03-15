@@ -11,31 +11,45 @@ function Vans() {
       type: "",
     },
   ]);
+  async function fetchData() {
+    const response = await fetch("/api/vans");
+    const data = await response.json();
+    const vanList = data.vans;
+    setVans(vanList);
+  }
+
   useEffect(() => {
-    fetch("/api/vans")
-      .then((response) => response.json())
-      .then((data) => {
-        const Vans = data.vans;
-        setVans(
-          Vans.map((vans) => {
-            return {
-              id: vans.id,
-              name: vans.name,
-              price: vans.price,
-              description: vans.description,
-              imageUrl: vans.imageUrl,
-              type: vans.type,
-            };
-          })
-        );
-      });
+    fetchData();
   }, []);
-  console.log(vans);
+  async function fetchFilteredVans(type) {
+    const response = await fetch(`/api/vans`);
+    const data = await response.json();
+    const vanList = data.vans;
+    setVans(vanList.filter((van) => van.type === type));
+  }
   return (
     <div>
       <main className="bg-main p-4">
         <div>
           <h1 className="m-5 font-bold text-large">Explore our vans options</h1>
+          <div className="flex flex-row gap-4">
+            <button
+              onClick={() => {
+                fetchFilteredVans("simple");
+              }}
+            >
+              simple
+            </button>
+            <button onClick={() => fetchFilteredVans("rugged")}>rugged</button>
+            <button
+              onClick={() => {
+                fetchFilteredVans("luxury");
+              }}
+            >
+              luxury
+            </button>
+            <button onClick={() => fetchData()}>All</button>
+          </div>
           <div className="grid grid-cols-2 place-items-center gap-20">
             {vans.map((van) => {
               return (

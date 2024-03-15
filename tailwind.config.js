@@ -19,6 +19,7 @@ export default {
       secondary: "black",
       red: "#FF8C38",
       blue: "blue",
+      Gray: "rgb(107 114 128)",
     },
     height: {
       mainPageSize: "900px",
@@ -29,6 +30,8 @@ export default {
     },
     fontSize: {
       vs: "0.6rem",
+      small: "0.8rem",
+      medium: "1.5rem",
       large: "2rem",
       veryLarge: "3rem",
     },
