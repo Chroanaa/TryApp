@@ -1,6 +1,8 @@
 import React from "react";
 import { useEffect, useState, Suspense } from "react";
-const ListedVans = React.lazy(() => import("./ListedVans"));
+const ListedVans = React.lazy(() =>
+  import("../../components/ui/HorizontalCard")
+);
 function Dashboard() {
   const [vans, setVans] = useState(null);
   const [limit, setLimit] = useState(3);
@@ -10,12 +12,17 @@ function Dashboard() {
     const vanList = data.vans;
     setVans(vanList);
   }
-  useEffect(() => {
-    if (cacheData()) {
-      const data = localStorage.getItem("vans");
-      setVans(JSON.parse(data));
+  const checkLocalStorage = () => {
+    if (localStorage.getItem("vans")) {
+      return true;
     }
+  };
+  useEffect(() => {
     fetchData();
+    cacheData();
+    if (checkLocalStorage()) {
+      setVans(JSON.parse(localStorage.getItem("vans")));
+    }
   }, []);
   const cacheData = async () => {
     const respone = await fetch("/api/vans");
@@ -43,7 +50,7 @@ function Dashboard() {
           <span className="font-bold">Listed Vans</span>
           {limit === 3 ? (
             <button
-              className="text-secondary ml-[28.5rem]"
+              className="text-secondary ml-[28.5rem] bg-[]"
               onClick={() => {
                 setLimit(limit + 3);
               }}

@@ -23,14 +23,18 @@ function Vans() {
     const vanList = data.vans;
     localStorage.setItem("vans", JSON.stringify(vanList));
   };
-
-  useEffect(() => {
-    if (cacheData()) {
-      const data = localStorage.getItem("vans");
-      setVans(JSON.parse(data));
+  const checkLocalStorage = () => {
+    if (localStorage.getItem("vans")) {
+      return true;
     }
+  };
+  useEffect(() => {
     fetchData();
-  }, []);
+    cacheData();
+    if (checkLocalStorage()) {
+      setVans(JSON.parse(localStorage.getItem("vans")));
+    }
+  }, [cacheData]);
   async function fetchFilteredVans(type) {
     const response = await fetch(`/api/vans`);
     const data = await response.json();
@@ -44,14 +48,21 @@ function Vans() {
           <h1 className="m-5 font-bold text-large">Explore our vans options</h1>
           <div className="flex flex-row gap-4">
             <button
+              className="bg-orange text-primary px-4 py-2 rounded-lg hover:bg-opacity-70"
               onClick={() => {
                 fetchFilteredVans("simple");
               }}
             >
               simple
             </button>
-            <button onClick={() => fetchFilteredVans("rugged")}>rugged</button>
             <button
+              className="bg-[#115E59] text-primary px-4 py-2 rounded-lg hover:bg-opacity-70"
+              onClick={() => fetchFilteredVans("rugged")}
+            >
+              rugged
+            </button>
+            <button
+              className="bg-[#161616] text-primary px-4 py-2 rounded-lg hover:bg-opacity-70"
               onClick={() => {
                 fetchFilteredVans("luxury");
               }}

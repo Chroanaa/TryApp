@@ -32,13 +32,17 @@ function VanDetails() {
     const vanList = data.vans;
     localStorage.setItem(`details${param.id}`, JSON.stringify(vanList));
   };
-
+  const checkLocalStorage = () => {
+    if (localStorage.getItem(`details${param.id}`)) {
+      return true;
+    }
+  };
   useEffect(() => {
-    cacheData().then(() => {
-      const data = localStorage.getItem(`details${param.id}`);
-      setVanDetails(JSON.parse(data));
-    });
     fetchVanDetails();
+    cacheData();
+    if (checkLocalStorage()) {
+      setVanDetails(JSON.parse(localStorage.getItem(`details${param.id}`)));
+    }
   }, []);
 
   let typeColor = "";

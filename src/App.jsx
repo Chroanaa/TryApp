@@ -23,8 +23,8 @@ function App() {
             <Route index element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="income" element={<Income />} />
-            <Route path="vans" element={<h1>Vans</h1>} />
-            <Route path="reviews" element={<h1>Reviews</h1>} />
+            <Route path="vans" element={<HostVans />} />
+            <Route path="reviews" element={<Reviews />} />
           </Route>
         </Route>
       </Routes>
