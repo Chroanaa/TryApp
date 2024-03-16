@@ -2,11 +2,15 @@ import React from "react";
 
 function ListedVans(props) {
   return (
-    <div className="flex flex-col">
-      <img src={props.img} alt="" />
-      <div>{props.name}</div>
-      <div>{props.price}</div>
-      <div>{props.description}</div>
+    <div>
+      <div className="flex flex-row gap-4 bg-main max-w-[50rem] p-5 mb-6">
+        <img src={props.img} alt="van" className="h-20 w-20 rounded" />
+        <div className="flex flex-col mt-4 ">
+          <p className="font-bold">{props.name}</p>
+          <p>${props.price}/day</p>
+        </div>
+        <button className="absolute left-[55rem] mt-5">Edit</button>
+      </div>
     </div>
   );
 }

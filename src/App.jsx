@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import About from "../src/components/About.jsx";
 import Home from "../src/components/Home.jsx";
 import Vans from "./Pages/vans/Vans.jsx";
@@ -19,7 +19,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/vans" element={<Vans />} />
           <Route path="/vans/:id" element={<VanDetails />} />
-          <Route path="/host" element={<Host />}>
+          <Route path="/host/*" element={<Host />}>
+            <Route index element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="income" element={<Income />} />
             <Route path="vans" element={<h1>Vans</h1>} />

@@ -17,8 +17,18 @@ function Vans() {
     const vanList = data.vans;
     setVans(vanList);
   }
+  const cacheData = async () => {
+    const response = await fetch("/api/vans");
+    const data = await response.json();
+    const vanList = data.vans;
+    localStorage.setItem("vans", JSON.stringify(vanList));
+  };
 
   useEffect(() => {
+    if (cacheData()) {
+      const data = localStorage.getItem("vans");
+      setVans(JSON.parse(data));
+    }
     fetchData();
   }, []);
   async function fetchFilteredVans(type) {
