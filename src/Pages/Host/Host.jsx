@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { Routes, Route, NavLink, Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 function Host() {
   const currentLink = ({ isActive }) => {
     return {
@@ -8,7 +7,7 @@ function Host() {
   };
   return (
     <div>
-      <div className="flex flex-row gap-4 font-semiBold p-10 bg-main">
+      <nav className="flex flex-row gap-4 font-semiBold p-10 bg-main">
         <NavLink
           to="dashboard"
           className="underline decoration-white transition-colors duration-500 hover:decoration-blue underline-offset-4 decoration-2"
@@ -37,8 +36,7 @@ function Host() {
         >
           Reviews
         </NavLink>
-      </div>
-      <Outlet />
+      </nav>
     </div>
   );
 }

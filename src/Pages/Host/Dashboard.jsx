@@ -71,6 +71,8 @@ function Dashboard() {
         <div className="flex flex-col gap-4">
           {vans ? (
             <Suspense fallback={<div>Loading...</div>}>
+              {vans.length === 0 && <div>No vans listed yet</div>}
+              {/* This function just basically limits the vans that will be rendered*/}
               {vans.slice(0, limit).map((van) => {
                 return (
                   <ListedVans
@@ -79,6 +81,7 @@ function Dashboard() {
                     name={van.name}
                     price={van.price}
                     description={van.description}
+                    isEditable={true}
                   />
                 );
               })}

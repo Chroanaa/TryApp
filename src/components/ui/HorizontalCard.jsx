@@ -1,6 +1,7 @@
 import React from "react";
 
 function ListedVans(props) {
+  let editable = props.isEditable;
   return (
     <div>
       <div className="flex flex-row gap-4 bg-main max-w-[50rem] p-5 mb-6">
@@ -9,7 +10,9 @@ function ListedVans(props) {
           <p className="font-bold">{props.name}</p>
           <p>${props.price}/day</p>
         </div>
-        <button className="absolute left-[55rem] mt-5">Edit</button>
+        {editable && (
+          <button className="absolute left-[55rem] mt-5">Edit</button>
+        )}
       </div>
     </div>
   );
