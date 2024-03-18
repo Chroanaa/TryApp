@@ -1,33 +1,29 @@
 import React from "react";
 import ListedVans from "../../components/ui/HorizontalCard";
 import { useEffect, useState, Suspense } from "react";
+import useFetchData from "../../hooks/useFetchData";
+import useCacheData from "../../hooks/useCatchData";
+import useFetchCacheData from "../../hooks/useFetchCacheData";
 function Vans() {
   const [vans, setVans] = useState(null);
-  async function fetchData() {
-    const response = await fetch("/api/vans");
-    const data = await response.json();
-    const vanList = data.vans;
-    setVans(vanList);
-  }
   const checkLocalStorage = () => {
     if (localStorage.getItem("vans")) {
       return true;
     }
   };
+  const fetchData = async () => {
+    const data = await useFetchData("/api/vans");
+    useCacheData("vans", data);
+    setVans(data.vans);
+  };
   useEffect(() => {
     fetchData();
-    cacheData();
+
     if (checkLocalStorage()) {
-      setVans(JSON.parse(localStorage.getItem("vans")));
+      setVans(useFetchCacheData("vans"));
     }
   }, []);
-  const cacheData = async () => {
-    const respone = await fetch("/api/vans");
-    const data = await respone.json();
-    const vanList = data.vans;
-    const Data = localStorage.setItem("vans", JSON.stringify(vanList));
-    setVans(JSON.parse(Data));
-  };
+
   return (
     <div className="bg-[#ffead0] p-5">
       <h1 className="text-large font-bold">Your listed vans </h1>

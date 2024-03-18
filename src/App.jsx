@@ -15,8 +15,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* The element layout will always render and renders the first and it will render out its children components as it is a parent route and the layout contents will render too  */}
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
+        {/* only nest when you want to display the same component over multiple components */}
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/vans" element={<Vans />} />
           <Route path="/vans/:id" element={<VanDetails />} />

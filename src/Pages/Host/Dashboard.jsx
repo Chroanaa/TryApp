@@ -1,17 +1,19 @@
 import React from "react";
 import { useEffect, useState, Suspense } from "react";
+import useFetchData from "../../hooks/useFetchData";
+import useCacheData from "../../hooks/useCatchData";
+import useFetchCacheData from "../../hooks/useFetchCacheData";
 const ListedVans = React.lazy(() =>
   import("../../components/ui/HorizontalCard")
 );
 function Dashboard() {
   const [vans, setVans] = useState(null);
   const [limit, setLimit] = useState(3);
-  async function fetchData() {
-    const response = await fetch("/api/vans");
-    const data = await response.json();
-    const vanList = data.vans;
-    setVans(vanList);
-  }
+  const fetchData = async () => {
+    const data = await useFetchData("/api/vans");
+    setVans(data.vans);
+    useCacheData("vans", data);
+  };
   const checkLocalStorage = () => {
     if (localStorage.getItem("vans")) {
       return true;
@@ -19,18 +21,11 @@ function Dashboard() {
   };
   useEffect(() => {
     fetchData();
-    cacheData();
     if (checkLocalStorage()) {
-      setVans(JSON.parse(localStorage.getItem("vans")));
+      setVans(useFetchCacheData("vans"));
     }
   }, []);
-  const cacheData = async () => {
-    const respone = await fetch("/api/vans");
-    const data = await respone.json();
-    const vanList = data.vans;
-    const Data = localStorage.setItem("vans", JSON.stringify(vanList));
-    setVans(JSON.parse(Data));
-  };
+
   return (
     <div className="bg-[#ffead0] p-8">
       <div className="ml-36">
@@ -71,7 +66,6 @@ function Dashboard() {
         <div className="flex flex-col gap-4">
           {vans ? (
             <Suspense fallback={<div>Loading...</div>}>
-              {vans.length === 0 && <div>No vans listed yet</div>}
               {/* This function just basically limits the vans that will be rendered*/}
               {vans.slice(0, limit).map((van) => {
                 return (

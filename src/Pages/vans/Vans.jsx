@@ -1,28 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Card from "../../components/ui/Card";
+import useFetchData from "../../hooks/useFetchData";
+import useCacheData from "../../hooks/useCatchData";
+import useFetchCacheData from "../../hooks/useFetchCacheData";
 function Vans() {
-  const [vans, setVans] = useState([
-    {
-      id: "",
-      name: "",
-      price: 0,
-      description: "",
-      imageUrl: "",
-      type: "",
-    },
-  ]);
+  const [vans, setVans] = useState(null);
   async function fetchData() {
-    const response = await fetch("/api/vans");
-    const data = await response.json();
-    const vanList = data.vans;
-    setVans(vanList);
+    const data = await useFetchData("/api/vans");
+    setVans(data.vans);
+    useCacheData("vans", data.vans);
   }
-  const cacheData = async () => {
-    const response = await fetch("/api/vans");
-    const data = await response.json();
-    const vanList = data.vans;
-    localStorage.setItem("vans", JSON.stringify(vanList));
-  };
   const checkLocalStorage = () => {
     if (localStorage.getItem("vans")) {
       return true;
@@ -30,17 +17,14 @@ function Vans() {
   };
   useEffect(() => {
     fetchData();
-    cacheData();
+    fetchCache();
+  }, []);
+  const fetchCache = () => {
     if (checkLocalStorage()) {
-      setVans(JSON.parse(localStorage.getItem("vans")));
+      setVans(useFetchCacheData("vans"));
     }
-  }, [cacheData]);
-  async function fetchFilteredVans(type) {
-    const response = await fetch(`/api/vans`);
-    const data = await response.json();
-    const vanList = data.vans;
-    setVans(vanList.filter((van) => van.type === type));
-  }
+  };
+
   return (
     <div>
       <main className="bg-main p-4">
@@ -71,19 +55,23 @@ function Vans() {
             </button>
             <button onClick={() => fetchData()}>All</button>
           </div>
-          <div className="grid grid-cols-2 place-items-center gap-20">
-            {vans.map((van) => {
-              return (
-                <Card
-                  key={van.id}
-                  name={van.name}
-                  price={van.price}
-                  imageUrl={van.imageUrl}
-                  type={van.type}
-                  id={van.id}
-                />
-              );
-            })}
+          <div className="grid grid-cols-2 place-items-center gap-20 mt-10">
+            {vans ? (
+              vans.map((van) => {
+                return (
+                  <Card
+                    key={van.id}
+                    imageUrl={van.imageUrl}
+                    name={van.name}
+                    price={van.price}
+                    description={van.description}
+                    id={van.id}
+                  />
+                );
+              })
+            ) : (
+              <div>Loading...</div>
+            )}
           </div>
         </div>
       </main>
