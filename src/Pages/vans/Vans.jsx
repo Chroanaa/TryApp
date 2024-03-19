@@ -8,27 +8,29 @@ function Vans() {
   async function fetchData() {
     const data = await useFetchData("/api/vans");
     setVans(data.vans);
-    useCacheData("vans", data.vans);
+    useCacheData("allVans", data.vans);
   }
   const checkLocalStorage = () => {
-    if (localStorage.getItem("vans")) {
+    if (localStorage.getItem("allVans")) {
       return true;
     }
   };
   useEffect(() => {
-    fetchData();
-    fetchCache();
-  }, []);
-  const fetchCache = () => {
     if (checkLocalStorage()) {
-      setVans(useFetchCacheData("vans"));
+      setVans(JSON.parse(localStorage.getItem("allVans")));
+    } else {
+      fetchData();
     }
+  }, []);
+  const fetchFilteredVans = async (type) => {
+    const data = await useFetchData("/api/vans");
+    setVans(data.vans.filter((van) => van.type === type));
+    console.log(type);
   };
-
   return (
     <div>
-      <main className="bg-main p-4">
-        <div>
+      <main className="bg-main p-10 ">
+        <div className="h-">
           <h1 className="m-5 font-bold text-large">Explore our vans options</h1>
           <div className="flex flex-row gap-4">
             <button
@@ -65,6 +67,7 @@ function Vans() {
                     name={van.name}
                     price={van.price}
                     description={van.description}
+                    type={van.type}
                     id={van.id}
                   />
                 );

@@ -19,7 +19,7 @@ function Card(props) {
   };
 
   return (
-    <div>
+    <div className="">
       <NavLink
         to={`/vans/${props.id}`}
         aria-label={`view details for ${props.name} priced at ${props.price}`}

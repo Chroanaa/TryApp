@@ -35,9 +35,9 @@ function Income() {
             last <span className="underline">30 Days</span>
           </span>
           <div className="flex flex-col gap-5 max-w-[80%] mt-5">
-            {Transactions.map((transaction) => {
+            {Transactions.map((transaction, index) => {
               return (
-                <div className="flex justify-between bg-White p-5">
+                <div key={index} className="flex justify-between bg-White p-5">
                   <span className="text-medium">{transaction.amount}</span>
                   <span className="text-medium">{transaction.date}</span>
                 </div>

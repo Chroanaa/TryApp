@@ -80,7 +80,7 @@ function VanDetails() {
             width={700}
             className=" mx-auto mt-5 mb-5"
           />
-          <div className="flex flex-col ml-[44.5rem] gap-3">
+          <div className="flex flex-col ml-[37.5rem] gap-3">
             <div
               className="max-w-20 px-2 py-1 rounded text-[#FFCC8D] font-semiBold mt-5 mb-5"
               style={styles}

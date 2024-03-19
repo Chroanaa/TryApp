@@ -17,11 +17,10 @@ function Vans() {
     setVans(data.vans);
   };
   useEffect(() => {
-    fetchData();
-
-    if (checkLocalStorage()) {
-      setVans(useFetchCacheData("vans"));
+    if (!checkLocalStorage()) {
+      fetchData();
     }
+    setVans(useFetchCacheData("vans"));
   }, []);
 
   return (
