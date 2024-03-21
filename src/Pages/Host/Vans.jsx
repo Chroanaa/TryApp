@@ -4,8 +4,10 @@ import { useEffect, useState, Suspense } from "react";
 import useFetchData from "../../hooks/useFetchData";
 import useCacheData from "../../hooks/useCatchData";
 import useFetchCacheData from "../../hooks/useFetchCacheData";
+import { Navigate, useNavigate } from "react-router-dom";
 function Vans() {
   const [vans, setVans] = useState(null);
+  let navigate = useNavigate();
   const checkLocalStorage = () => {
     if (localStorage.getItem("vans")) {
       return true;
@@ -38,6 +40,7 @@ function Vans() {
                   price={van.price}
                   description={van.description}
                   isEditable={false}
+                  id={van.id}
                 />
               );
             })}

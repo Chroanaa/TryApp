@@ -4,6 +4,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 
 function VanDetails() {
   const param = useParams();
+  const abortFetchData = new AbortController();
   const [vanDetails, setVanDetails] = useState({
     id: "",
     name: "",
@@ -13,7 +14,10 @@ function VanDetails() {
     type: "",
   });
   async function fetchVanDetails() {
-    const response = await fetch(`/api/vans/${param.id}`);
+    const response = await fetch(
+      `/api/vans/${param.id}`,
+      abortFetchData.signal
+    );
     const data = await response.json();
     const Details = data.vans;
     setVanDetails({
@@ -43,6 +47,9 @@ function VanDetails() {
     if (checkLocalStorage()) {
       setVanDetails(JSON.parse(localStorage.getItem(`details${param.id}`)));
     }
+    return () => {
+      abortFetchData.abort();
+    };
   }, []);
 
   let typeColor = "";

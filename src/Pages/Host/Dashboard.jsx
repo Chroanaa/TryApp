@@ -3,14 +3,16 @@ import { useEffect, useState, Suspense } from "react";
 import useFetchData from "../../hooks/useFetchData";
 import useCacheData from "../../hooks/useCatchData";
 import useFetchCacheData from "../../hooks/useFetchCacheData";
+import { useNavigate } from "react-router-dom";
 const ListedVans = React.lazy(() =>
   import("../../components/ui/HorizontalCard")
 );
 function Dashboard() {
+  const abortFetchData = new AbortController();
   const [vans, setVans] = useState(null);
   const [limit, setLimit] = useState(3);
   const fetchData = async () => {
-    const data = await useFetchData("/api/vans");
+    const data = await useFetchData("/api/vans", abortFetchData.signal);
     setVans(data.vans);
     useCacheData("vans", data);
   };
@@ -20,12 +22,20 @@ function Dashboard() {
     }
   };
   useEffect(() => {
-    if (!checkLocalStorage()) {
+    if (checkLocalStorage()) {
+      setVans(JSON.parse(localStorage.getItem("vans")).vans);
+    } else {
       fetchData();
     }
-    setVans(useFetchCacheData("vans"));
+    return () => {
+      abortFetchData.abort();
+      console.log("clean up");
+    };
   }, []);
-
+  let navigate = useNavigate();
+  const handleDetails = (id) => {
+    navigate(`/host/dashboard/${id}`);
+  };
   return (
     <div className="bg-[#ffead0] p-8">
       <div className="ml-36">
@@ -76,6 +86,7 @@ function Dashboard() {
                     price={van.price}
                     description={van.description}
                     isEditable={true}
+                    id={van.id}
                   />
                 );
               })}

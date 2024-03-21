@@ -3,10 +3,15 @@ import Card from "../../components/ui/Card";
 import useFetchData from "../../hooks/useFetchData";
 import useCacheData from "../../hooks/useCatchData";
 import useFetchCacheData from "../../hooks/useFetchCacheData";
+
 function Vans() {
+  const abortFetchData = new AbortController(); // this is the controller that listen for the abort signal
+
   const [vans, setVans] = useState(null);
+
   async function fetchData() {
-    const data = await useFetchData("/api/vans");
+    //fetch from the api
+    const data = await useFetchData("/api/vans", abortFetchData.signal); //cancels the request when the component is unmounted
     setVans(data.vans);
     useCacheData("allVans", data.vans);
   }
@@ -17,16 +22,26 @@ function Vans() {
   };
   useEffect(() => {
     if (checkLocalStorage()) {
+      // a function that checks if the data is in the local storage and then fetches them
       setVans(JSON.parse(localStorage.getItem("allVans")));
     } else {
       fetchData();
     }
+    return () => {
+      // a cleanup function that runs when the component is unmounted, in this case it is used to cancel the fetch request when moving to another route or page
+      abortFetchData.abort();
+      console.log(abortFetchData.signal.aborted, "aborted fetch data");
+    };
   }, []);
   const fetchFilteredVans = async (type) => {
-    const data = await useFetchData("/api/vans");
-    setVans(data.vans.filter((van) => van.type === type));
-    console.log(type);
+    const filteredData = await useFetchData(
+      "/api/vans",
+      abortFetchFilter.signal
+    );
+    const filteredVans = filteredData.vans.filter((van) => van.type === type);
+    setVans(filteredVans);
   };
+
   return (
     <div>
       <main className="bg-main p-10 ">
