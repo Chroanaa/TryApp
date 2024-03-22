@@ -33,9 +33,6 @@ function Dashboard() {
     };
   }, []);
   let navigate = useNavigate();
-  const handleDetails = (id) => {
-    navigate(`/host/dashboard/${id}`);
-  };
   return (
     <div className="bg-[#ffead0] p-8">
       <div className="ml-36">
@@ -87,6 +84,7 @@ function Dashboard() {
                     description={van.description}
                     isEditable={true}
                     id={van.id}
+                    onClick={() => navigate(`/host/vans/${van.id}`)}
                   />
                 );
               })}

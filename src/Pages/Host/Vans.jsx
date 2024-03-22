@@ -24,7 +24,9 @@ function Vans() {
     }
     setVans(useFetchCacheData("vans"));
   }, []);
-
+  const handleNavigate = (id) => {
+    navigate(`/host/vans/${id}`);
+  };
   return (
     <div className="bg-[#ffead0] p-5">
       <h1 className="text-large font-bold">Your listed vans </h1>
@@ -41,6 +43,7 @@ function Vans() {
                   description={van.description}
                   isEditable={false}
                   id={van.id}
+                  onClick={() => handleNavigate(van.id)}
                 />
               );
             })}

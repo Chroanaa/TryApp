@@ -3,16 +3,15 @@ import "./server";
 import About from "../src/components/About.jsx";
 import Home from "../src/components/Home.jsx";
 import Vans from "./Pages/vans/Vans.jsx";
-import VanDetails from "./Pages/vans/VanDetails.jsx";
+import VanDetails from "./Pages/vans/SeeVanDetails.jsx";
 import Layout from "./components/Layout.jsx";
 import HostLayout from "./components/HostLayout.jsx";
 import Dashboard from "./Pages/Host/Dashboard.jsx";
 import Income from "./Pages/Host/Income.jsx";
 import HostVans from "./Pages/Host/Vans.jsx";
 import Reviews from "./Pages/Host/Reviews.jsx";
-import HostVansDetails from "./Pages/Host/VansDetails/HostVanDetails.jsx";
-import HostVansLayout from "./components/HostVansLayout.jsx";
-import Details from "./Pages/Host/VansDetails/VanDetails.jsx";
+import HostVansDetails from "./Pages/Host/VansDetails/SeeVanDetails.jsx";
+import Description from "./Pages/Host/VansDetails/Description.jsx";
 function App() {
   return (
     <BrowserRouter>
@@ -32,15 +31,14 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="income" element={<Income />} />
             <Route path="vans" element={<HostVans />} />
+            <Route path="reviews" element={<Reviews />} />
             <Route path="vans/:id" element={<HostVansDetails />}>
-              <Route path="vans/:id" element={<HostVansLayout />} />
-              <Route index element={<Details />} />
-              <Route index path="details" element={<Details />} />
+              <Route index element={<Description />} />
+              <Route path="details" element={<Description />} />
             </Route>
             <Route path="dashboard/:id" element={<HostVansDetails />}>
-              <Route path="dashboard/:id" element={<HostVansLayout />} />
-              <Route index element={<Details />} />
-              <Route index path="details" element={<Details />} />
+              <Route index element={<Description />} />
+              <Route path="details" element={<Description />} />
             </Route>
           </Route>
         </Route>
