@@ -7,8 +7,8 @@ function HostVansLayout() {
     };
   };
   return (
-    <div>
-      <nav className="flex gap-10 bg-main p-4 ">
+    <nav className="bg-White">
+      <div className="flex gap-10 bg-White rounded">
         <NavLink
           to="details"
           style={currentLink}
@@ -30,9 +30,9 @@ function HostVansLayout() {
         >
           Photos
         </NavLink>
-      </nav>
+      </div>
       <Outlet />
-    </div>
+    </nav>
   );
 }
 export default HostVansLayout;

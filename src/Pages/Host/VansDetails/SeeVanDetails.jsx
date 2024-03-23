@@ -32,7 +32,7 @@ function HostVanDetails() {
     backgroundColor: setTypeColor(),
   };
   return (
-    <div className="bg-main">
+    <div className="bg-main pb-10 ">
       <NavLink
         to={"/vans"}
         className="flex flex-row underline decoration-white ml-12 max-w-[150px] transition-all hover:decoration-blue hover:scale-105 underline-offset-4 decoration-2 duration-500"
@@ -40,10 +40,9 @@ function HostVanDetails() {
         <FaArrowLeftLong className="self-center transition-all mr-2" />
         Back to vans
       </NavLink>
-      <div className="flex flex-col ml-10 mt-10 max-w-[700px] bg-White p-10 rounded">
+      <div className="flex flex-col ml-10 mt-10 p-10  max-w-[700px] bg-White rounded ">
         <div className="flex flex-row">
           <img src={vans?.imageUrl} width={200} alt={vans?.name} />
-
           <p>
             <span
               className="max-w-20 px-2 py-1 rounded text-[#FFCC8D] font-semiBold mt-5 mb-5 text-center"
