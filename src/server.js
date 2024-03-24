@@ -15,6 +15,7 @@ let server = createServer({
       imageUrl:
         "https://assets.scrimba.com/advanced-react/react-router/modest-explorer.png",
       type: "simple",
+      visibility: "public",
     });
     server.create("van", {
       id: "2",
@@ -25,6 +26,7 @@ let server = createServer({
       imageUrl:
         "https://assets.scrimba.com/advanced-react/react-router/beach-bum.png",
       type: "rugged",
+      visibility: "public",
     });
     server.create("van", {
       id: "3",
@@ -35,6 +37,7 @@ let server = createServer({
       imageUrl:
         "https://assets.scrimba.com/advanced-react/react-router/reliable-red.png",
       type: "luxury",
+      visibility: "public",
     });
     server.create("van", {
       id: "4",
@@ -45,6 +48,7 @@ let server = createServer({
       imageUrl:
         "https://assets.scrimba.com/advanced-react/react-router/dreamfinder.png",
       type: "simple",
+      visibility: "public",
     });
     server.create("van", {
       id: "5",
@@ -55,6 +59,7 @@ let server = createServer({
       imageUrl:
         "https://assets.scrimba.com/advanced-react/react-router/the-cruiser.png",
       type: "luxury",
+      visibility: "public",
     });
     server.create("van", {
       id: "6",
@@ -65,6 +70,7 @@ let server = createServer({
       imageUrl:
         "https://assets.scrimba.com/advanced-react/react-router/green-wonder.png",
       type: "rugged",
+      visibility: "public",
     });
   },
 

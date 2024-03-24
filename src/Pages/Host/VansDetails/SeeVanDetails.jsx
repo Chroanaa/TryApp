@@ -32,7 +32,7 @@ function HostVanDetails() {
     backgroundColor: setTypeColor(),
   };
   return (
-    <div className="bg-main pb-10 ">
+    <div className="bg-main">
       <NavLink
         to={"/vans"}
         className="flex flex-row underline decoration-white ml-12 max-w-[150px] transition-all hover:decoration-blue hover:scale-105 underline-offset-4 decoration-2 duration-500"
@@ -40,22 +40,28 @@ function HostVanDetails() {
         <FaArrowLeftLong className="self-center transition-all mr-2" />
         Back to vans
       </NavLink>
-      <div className="flex flex-col ml-10 mt-10 p-10  max-w-[700px] bg-White rounded ">
-        <div className="flex flex-row">
-          <img src={vans?.imageUrl} width={200} alt={vans?.name} />
-          <p>
-            <span
-              className="max-w-20 px-2 py-1 rounded text-[#FFCC8D] font-semiBold mt-5 mb-5 text-center"
-              style={styles}
-            >
-              {vans?.type}
-            </span>{" "}
-            <br /> {vans?.name} <br />${vans?.price}
-            /day
-          </p>
+      <div className="bg-main flex flex-col justify-center place-items-center pb-[15rem] ">
+        <div className="flex flex-col  mt-10 p-10  max-w-[500px] bg-White rounded ">
+          <div className="flex flex-row gap-2">
+            <img
+              src={vans?.imageUrl}
+              className="mb-5"
+              width={200}
+              alt={vans?.name}
+            />
+            <p className="mt-5">
+              <span
+                className="max-w-20 px-2 py-1 rounded text-[#FFCC8D] font-semiBold mt-5 mb-5 text-center"
+                style={styles}
+              >
+                {vans?.type}
+              </span>{" "}
+              <br /> {vans?.name} <br />${vans?.price}
+              /day
+            </p>
+          </div>
+          <HostVansLayout />
         </div>
-        <p>{vans?.description}</p>
-        <HostVansLayout />
       </div>
     </div>
   );

@@ -12,6 +12,9 @@ import HostVans from "./Pages/Host/Vans.jsx";
 import Reviews from "./Pages/Host/Reviews.jsx";
 import HostVansDetails from "./Pages/Host/VansDetails/SeeVanDetails.jsx";
 import Description from "./Pages/Host/VansDetails/Description.jsx";
+import Pricing from "./Pages/Host/VansDetails/Pricing.jsx";
+import Photos from "./Pages/Host/VansDetails/Photos.jsx";
+
 function App() {
   return (
     <BrowserRouter>
@@ -35,10 +38,14 @@ function App() {
             <Route path="vans/:id" element={<HostVansDetails />}>
               <Route index element={<Description />} />
               <Route path="details" element={<Description />} />
+              <Route path="pricing" element={<Pricing />} />
+              <Route path="photos" element={<Photos />} />
             </Route>
             <Route path="dashboard/:id" element={<HostVansDetails />}>
               <Route index element={<Description />} />
               <Route path="details" element={<Description />} />
+              <Route path="pricing" element={<Pricing />} />
+              <Route path="photos" element={<Photos />} />
             </Route>
           </Route>
         </Route>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useFetchData from "../../../hooks/useFetchData";
-function pricing() {
+function Photos() {
   const param = useParams();
   const [vans, setVans] = useState(null);
   const fetchData = async () => {
@@ -11,7 +11,11 @@ function pricing() {
   useEffect(() => {
     fetchData();
   }, []);
-  return <div>{vans?.price}/day</div>;
+  return (
+    <div className="rounded">
+      <img src={vans?.imageUrl} alt="" width={100} />
+    </div>
+  );
 }
 
-export default pricing;
+export default Photos;

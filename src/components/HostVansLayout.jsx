@@ -8,7 +8,7 @@ function HostVansLayout() {
   };
   return (
     <nav className="bg-White">
-      <div className="flex gap-10 bg-White rounded">
+      <div className="flex gap-10 bg-White rounded mb-5">
         <NavLink
           to="details"
           style={currentLink}
@@ -17,14 +17,14 @@ function HostVansLayout() {
           Details
         </NavLink>
         <NavLink
-          to="/about"
+          to="pricing"
           className="underline decoration-white transition-colors duration-500 hover:decoration-blue underline-offset-4 decoration-2"
           style={currentLink}
         >
           Pricing
         </NavLink>
         <NavLink
-          to="/vans"
+          to="photos"
           style={currentLink}
           className="underline decoration-white transition-colors duration-500 hover:decoration-blue underline-offset-4 decoration-2"
         >
