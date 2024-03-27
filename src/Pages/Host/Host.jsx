@@ -9,7 +9,8 @@ function Host() {
     <div>
       <nav className="flex flex-row gap-4 font-semiBold p-10 bg-main">
         <NavLink
-          to="dashboard"
+          to="."
+          end
           className="underline decoration-white transition-colors duration-500 hover:decoration-blue underline-offset-4 decoration-2"
           style={currentLink}
         >

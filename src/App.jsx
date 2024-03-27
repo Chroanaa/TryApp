@@ -37,13 +37,11 @@ function App() {
             <Route path="reviews" element={<Reviews />} />
             <Route path="vans/:id" element={<HostVansDetails />}>
               <Route index element={<Description />} />
-              <Route path="details" element={<Description />} />
               <Route path="pricing" element={<Pricing />} />
               <Route path="photos" element={<Photos />} />
             </Route>
             <Route path="dashboard/:id" element={<HostVansDetails />}>
               <Route index element={<Description />} />
-              <Route path="details" element={<Description />} />
               <Route path="pricing" element={<Pricing />} />
               <Route path="photos" element={<Photos />} />
             </Route>

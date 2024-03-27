@@ -34,10 +34,7 @@ function Vans() {
     };
   }, []);
   const fetchFilteredVans = async (type) => {
-    const filteredData = await useFetchData(
-      "/api/vans",
-      abortFetchFilter.signal
-    );
+    const filteredData = await useFetchData("/api/vans");
     const filteredVans = filteredData.vans.filter((van) => van.type === type);
     setVans(filteredVans);
   };

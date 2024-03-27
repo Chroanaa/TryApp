@@ -33,8 +33,10 @@ function HostVanDetails() {
   };
   return (
     <div className="bg-main">
+      {/* this just says that this route is relative to the paths not the routes so that we can go back up a path not a route */}
       <NavLink
-        to={"/vans"}
+        to={".."}
+        relative="path"
         className="flex flex-row underline decoration-white ml-12 max-w-[150px] transition-all hover:decoration-blue hover:scale-105 underline-offset-4 decoration-2 duration-500"
       >
         <FaArrowLeftLong className="self-center transition-all mr-2" />
