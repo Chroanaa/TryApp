@@ -4,26 +4,11 @@ import { useEffect, useState, Suspense } from "react";
 import useFetchData from "../../hooks/useFetchData";
 import useCacheData from "../../hooks/useCatchData";
 import useFetchCacheData from "../../hooks/useFetchCacheData";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
 function Vans() {
-  const [vans, setVans] = useState(null);
+  const [vans] = useOutletContext(); //gets the data from the context of the parent component
   let navigate = useNavigate();
-  const checkLocalStorage = () => {
-    if (localStorage.getItem("vans")) {
-      return true;
-    }
-  };
-  const fetchData = async () => {
-    const data = await useFetchData("/api/vans");
-    useCacheData("vans", data);
-    setVans(data.vans);
-  };
-  useEffect(() => {
-    if (!checkLocalStorage()) {
-      fetchData();
-    }
-    setVans(useFetchCacheData("vans"));
-  }, []);
+
   const handleNavigate = (id) => {
     navigate(`/host/vans/${id}`);
   };

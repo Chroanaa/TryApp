@@ -1,37 +1,16 @@
 import React from "react";
 import { useEffect, useState, Suspense } from "react";
-import useFetchData from "../../hooks/useFetchData";
-import useCacheData from "../../hooks/useCatchData";
-import useFetchCacheData from "../../hooks/useFetchCacheData";
-import { useNavigate } from "react-router-dom";
+
+import { useNavigate, useOutletContext } from "react-router-dom";
 const ListedVans = React.lazy(() =>
   import("../../components/ui/HorizontalCard")
 );
 function Dashboard() {
   const abortFetchData = new AbortController();
-  const [vans, setVans] = useState(null);
+  const [vans] = useOutletContext();
   const [limit, setLimit] = useState(3);
-  const fetchData = async () => {
-    const data = await useFetchData("/api/vans", abortFetchData.signal);
-    setVans(data.vans);
-    useCacheData("vans", data);
-  };
-  const checkLocalStorage = () => {
-    if (localStorage.getItem("vans")) {
-      return true;
-    }
-  };
-  useEffect(() => {
-    if (checkLocalStorage()) {
-      setVans(JSON.parse(localStorage.getItem("vans")).vans);
-    } else {
-      fetchData();
-    }
-    return () => {
-      abortFetchData.abort();
-      console.log("clean up");
-    };
-  }, []);
+  console.log(vans);
+
   let navigate = useNavigate();
   return (
     <div className="bg-[#ffead0] p-8">

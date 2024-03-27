@@ -58,8 +58,7 @@ function HostVanDetails() {
               >
                 {vans?.type}
               </span>{" "}
-              <br /> {vans?.name} <br />${vans?.price}
-              /day
+              <br /> {vans?.name} <br />${vans?.price}/day
             </p>
           </div>
           <HostVansLayout />

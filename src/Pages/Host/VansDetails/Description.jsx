@@ -1,17 +1,7 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import useFetchData from "../../../hooks/useFetchData";
-import { useParams } from "react-router-dom";
+import React from "react";
+import { useOutletContext, useParams } from "react-router-dom";
 function Details() {
-  const params = useParams();
-  const [vans, setVans] = useState(null);
-  const fetchData = async () => {
-    const data = await useFetchData(`/api/vans/${params.id}`);
-    setVans(data.vans);
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const [vans] = useOutletContext();
   return (
     <div className="flex flex-col gap-5">
       <p>

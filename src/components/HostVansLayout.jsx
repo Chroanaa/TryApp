@@ -1,13 +1,27 @@
 import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import useFetchData from "../hooks/useFetchData";
+
 function HostVansLayout() {
   const currentLink = ({ isActive }) => {
     return {
       color: isActive ? "red" : "",
     };
   };
-
+  const abort = new AbortController();
+  const params = useParams();
+  const [vans, setVans] = React.useState(null);
+  const fetchData = async () => {
+    const data = await useFetchData(`/api/vans/${params.id}`, abort.signal);
+    setVans(data.vans);
+  };
+  React.useEffect(() => {
+    fetchData();
+    return () => {
+      console.log("cleaning up");
+      abort.abort();
+    };
+  }, []);
   return (
     <nav className="bg-White">
       <div className="flex gap-10 bg-White rounded mb-5">
@@ -34,7 +48,7 @@ function HostVansLayout() {
           Photos
         </NavLink>
       </div>
-      <Outlet />
+      <Outlet context={[vans, setVans]} />
     </nav>
   );
 }
