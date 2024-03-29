@@ -3,7 +3,7 @@ import Card from "../../components/ui/Card";
 import useFetchData from "../../hooks/useFetchData";
 import useCacheData from "../../hooks/useCatchData";
 import useFetchCacheData from "../../hooks/useFetchCacheData";
-
+import { useSearchParams } from "react-router-dom";
 function Vans() {
   const abortFetchData = new AbortController(); // this is the controller that listen for the abort signal
 
@@ -33,11 +33,11 @@ function Vans() {
       console.log(abortFetchData.signal.aborted, "aborted fetch data");
     };
   }, []);
-  const fetchFilteredVans = async (type) => {
-    const filteredData = await useFetchData("/api/vans");
-    const filteredVans = filteredData.vans.filter((van) => van.type === type);
-    setVans(filteredVans);
-  };
+  const [searchParams, setSearchParams] = useSearchParams();
+  const TypeFilter = searchParams.get("type");
+  const displayVans = TypeFilter
+    ? vans.filter((van) => van.type === TypeFilter)
+    : vans;
 
   return (
     <div>
@@ -48,21 +48,21 @@ function Vans() {
             <button
               className="bg-orange text-primary px-4 py-2 rounded-lg hover:bg-opacity-70"
               onClick={() => {
-                fetchFilteredVans("simple");
+                setSearchParams({ type: "simple" });
               }}
             >
               simple
             </button>
             <button
               className="bg-[#115E59] text-primary px-4 py-2 rounded-lg hover:bg-opacity-70"
-              onClick={() => fetchFilteredVans("rugged")}
+              onClick={() => setSearchParams({ type: "rugged" })}
             >
               rugged
             </button>
             <button
               className="bg-[#161616] text-primary px-4 py-2 rounded-lg hover:bg-opacity-70"
               onClick={() => {
-                fetchFilteredVans("luxury");
+                setSearchParams({ type: "luxury" });
               }}
             >
               luxury
@@ -70,8 +70,8 @@ function Vans() {
             <button onClick={() => fetchData()}>All</button>
           </div>
           <div className="grid grid-cols-2 place-items-center gap-20 mt-10">
-            {vans ? (
-              vans.map((van) => {
+            {displayVans ? (
+              displayVans.map((van) => {
                 return (
                   <Card
                     key={van.id}
