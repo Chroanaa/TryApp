@@ -38,36 +38,53 @@ function Vans() {
   const displayVans = TypeFilter
     ? vans.filter((van) => van.type === TypeFilter)
     : vans;
-
+  function handleFilter(key, value) {
+    setSearchParams((prevValue) => {
+      if (value === null) {
+        prevValue.delete(key);
+      } else {
+        prevValue.set(key, value);
+      }
+      return prevValue;
+    });
+  }
   return (
     <div>
       <main className="bg-main p-10 ">
-        <div className="h-">
+        <div>
           <h1 className="m-5 font-bold text-large">Explore our vans options</h1>
           <div className="flex flex-row gap-4">
             <button
-              className="bg-orange text-primary px-4 py-2 rounded-lg hover:bg-opacity-70"
+              className={`bg-[#f9a754] text-primary px-4 py-2 rounded-lg ${
+                TypeFilter === "simple" ? "bg-orange" : ""
+              }   transition-colors hover:bg-orange duration-500`}
               onClick={() => {
-                setSearchParams({ type: "simple" });
+                handleFilter("type", "simple");
               }}
             >
               simple
             </button>
             <button
-              className="bg-[#115E59] text-primary px-4 py-2 rounded-lg hover:bg-opacity-70"
-              onClick={() => setSearchParams({ type: "rugged" })}
+              className={`bg-[#f9a754] text-primary px-4 py-2 rounded-lg ${
+                TypeFilter === "rugged" ? "bg-[#115E59]" : ""
+              }  transition-colors hover:bg-[#115E59] duration-500 `}
+              onClick={() => handleFilter("type", "rugged")}
             >
               rugged
             </button>
             <button
-              className="bg-[#161616] text-primary px-4 py-2 rounded-lg hover:bg-opacity-70"
+              className={`bg-[#f9a754] text-primary px-4 py-2 rounded-lg transition-colors ${
+                TypeFilter === "luxury" ? "bg-black" : ""
+              } hover:bg-[#161616] duration-500   `}
               onClick={() => {
-                setSearchParams({ type: "luxury" });
+                handleFilter("type", "luxury");
               }}
             >
               luxury
             </button>
-            <button onClick={() => fetchData()}>All</button>
+            {TypeFilter && (
+              <button onClick={() => handleFilter("type", null)}>All</button>
+            )}
           </div>
           <div className="grid grid-cols-2 place-items-center gap-20 mt-10">
             {displayVans ? (
