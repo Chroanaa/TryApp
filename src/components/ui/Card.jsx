@@ -21,7 +21,8 @@ function Card(props) {
   return (
     <div className="">
       <NavLink
-        to={`/vans/${props.id}`}
+        state={{ search: props.searchParams }} // This is the search parameter that will be passed to the next page in order to save the search state
+        to={props.id}
         aria-label={`view details for ${props.name} priced at ${props.price}`}
       >
         <div className="flex flex-col max-w-[200px]  ">

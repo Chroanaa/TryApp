@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams, useLocation } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 
 function VanDetails() {
@@ -67,6 +67,9 @@ function VanDetails() {
   const styles = {
     backgroundColor: setTypeColor(),
   };
+  let location = useLocation();
+  const prevSearch = location.state.search; //Gets the state of the search parameter from the previous page
+
   return (
     <Suspense fallback={<h1>Loading...</h1>}>
       <div
@@ -74,7 +77,8 @@ function VanDetails() {
         className="bg-main"
       >
         <NavLink
-          to={"/vans"}
+          to={`..?${prevSearch}`}
+          relative="path"
           className="flex flex-row underline decoration-white ml-12 max-w-[150px] transition-all hover:decoration-blue hover:scale-105 underline-offset-4 decoration-2 duration-500"
         >
           <FaArrowLeftLong className="self-center transition-all mr-2" />

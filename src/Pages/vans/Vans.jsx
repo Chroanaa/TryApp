@@ -7,7 +7,7 @@ import { useSearchParams } from "react-router-dom";
 function Vans() {
   const abortFetchData = new AbortController(); // this is the controller that listen for the abort signal
 
-  const [vans, setVans] = useState(null);
+  const [vans, setVans] = useState([]);
 
   async function fetchData() {
     //fetch from the api
@@ -98,6 +98,7 @@ function Vans() {
                     description={van.description}
                     type={van.type}
                     id={van.id}
+                    searchParams={searchParams.toString()}
                   />
                 );
               })

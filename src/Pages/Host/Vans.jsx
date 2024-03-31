@@ -10,7 +10,7 @@ function Vans() {
   let navigate = useNavigate();
 
   const handleNavigate = (id) => {
-    navigate(`/host/vans/${id}`);
+    navigate(id);
   };
   return (
     <div className="bg-[#ffead0] p-5">
