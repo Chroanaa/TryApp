@@ -75,7 +75,6 @@ let server = createServer({
   },
 
   routes() {
-    this.timing = 2000;
     this.namespace = "api";
 
     this.get("/vans", (schema, request) => {

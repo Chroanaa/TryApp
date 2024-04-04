@@ -1,16 +1,13 @@
 import React from "react";
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, useLoaderData } from "react-router-dom";
 import useFetchData from "../hooks/useFetchData";
+export function loader() {
+  const data = useFetchData("/api/vans");
+  return data;
+}
 function HostLayout() {
-  const [vans, setVans] = React.useState(null);
-  const fetch = async () => {
-    const data = await useFetchData("/api/vans");
-    setVans(data.vans);
-    console.log("got the data");
-  };
-  React.useEffect(() => {
-    fetch();
-  }, []);
+  const { vans } = useLoaderData();
+
   const currentLink = ({ isActive }) => {
     return {
       color: isActive ? "red" : "",
@@ -49,7 +46,7 @@ function HostLayout() {
           Reviews
         </NavLink>
       </nav>
-      <Outlet context={[vans, setVans]} />
+      <Outlet context={[vans]} />
       {/* passing the data to the child component */}
     </div>
   );

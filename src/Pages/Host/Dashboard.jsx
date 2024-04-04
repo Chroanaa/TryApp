@@ -5,6 +5,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 const ListedVans = React.lazy(() =>
   import("../../components/ui/HorizontalCard")
 );
+
 function Dashboard() {
   const abortFetchData = new AbortController();
   const [vans] = useOutletContext();

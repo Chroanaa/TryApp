@@ -7,10 +7,12 @@ import {
 import "./server";
 import About from "../src/components/About.jsx";
 import Home from "../src/components/Home.jsx";
-import Vans from "./Pages/vans/Vans.jsx";
+import Vans, { loader as vansLoader } from "./Pages/vans/Vans.jsx";
 import VanDetails from "./Pages/vans/SeeVanDetails.jsx";
 import Layout from "./components/Layout.jsx";
-import HostLayout from "./components/HostLayout.jsx";
+import HostLayout, {
+  loader as hostVansLoader,
+} from "./components/HostLayout.jsx";
 import Dashboard from "./Pages/Host/Dashboard.jsx";
 import Income from "./Pages/Host/Income.jsx";
 import HostVans from "./Pages/Host/Vans.jsx";
@@ -26,9 +28,9 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/vans" element={<Vans />} />
+        <Route path="/vans" element={<Vans />} loader={vansLoader} />
         <Route path="/vans/:id" element={<VanDetails />} />
-        <Route path="/host" element={<HostLayout />}>
+        <Route path="/host" element={<HostLayout />} loader={hostVansLoader}>
           <Route index element={<Dashboard />} />
           {/* this index property what it does is once the parent route (Host) is rendered it will render this child route first and always */}
           <Route path="dashboard" element={<Dashboard />} />

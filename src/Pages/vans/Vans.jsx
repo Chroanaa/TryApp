@@ -3,36 +3,14 @@ import Card from "../../components/ui/Card";
 import useFetchData from "../../hooks/useFetchData";
 import useCacheData from "../../hooks/useCatchData";
 import useFetchCacheData from "../../hooks/useFetchCacheData";
-import { useSearchParams } from "react-router-dom";
+import { useLoaderData, useSearchParams } from "react-router-dom";
+export async function loader() {
+  const data = useFetchData("/api/vans");
+  return data;
+}
 function Vans() {
   const abortFetchData = new AbortController(); // this is the controller that listen for the abort signal
-
-  const [vans, setVans] = useState([]);
-  const [loading, isLoading] = useState(false);
-
-  async function fetchData() {
-    //fetch from the api
-    const data = await useFetchData("/api/vans", abortFetchData.signal); //cancels the request when the component is unmounted
-    setVans(data.vans);
-    useCacheData("allVans", data.vans);
-    isLoading(false);
-  }
-  const checkLocalStorage = () => {
-    if (localStorage.getItem("allVans")) {
-      return true;
-    }
-  };
-  useEffect(() => {
-    isLoading(true);
-    fetchData();
-
-    return () => {
-      // a cleanup function that runs when the component is unmounted, in this case it is used to cancel the fetch request when moving to another route or page
-      abortFetchData.abort();
-      console.log(abortFetchData.signal.aborted, "aborted fetch data");
-    };
-  }, []);
-
+  const { vans } = useLoaderData();
   const [searchParams, setSearchParams] = useSearchParams();
   const TypeFilter = searchParams.get("type");
   const displayVans = TypeFilter
@@ -48,9 +26,7 @@ function Vans() {
       return prevValue;
     });
   }
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+
   return (
     <div>
       <main className="bg-main p-10 ">
