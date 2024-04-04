@@ -8,12 +8,14 @@ function Vans() {
   const abortFetchData = new AbortController(); // this is the controller that listen for the abort signal
 
   const [vans, setVans] = useState([]);
+  const [loading, isLoading] = useState(false);
 
   async function fetchData() {
     //fetch from the api
     const data = await useFetchData("/api/vans", abortFetchData.signal); //cancels the request when the component is unmounted
     setVans(data.vans);
     useCacheData("allVans", data.vans);
+    isLoading(false);
   }
   const checkLocalStorage = () => {
     if (localStorage.getItem("allVans")) {
@@ -21,18 +23,16 @@ function Vans() {
     }
   };
   useEffect(() => {
-    if (checkLocalStorage()) {
-      // a function that checks if the data is in the local storage and then fetches them
-      setVans(JSON.parse(localStorage.getItem("allVans")));
-    } else {
-      fetchData();
-    }
+    isLoading(true);
+    fetchData();
+
     return () => {
       // a cleanup function that runs when the component is unmounted, in this case it is used to cancel the fetch request when moving to another route or page
       abortFetchData.abort();
       console.log(abortFetchData.signal.aborted, "aborted fetch data");
     };
   }, []);
+
   const [searchParams, setSearchParams] = useSearchParams();
   const TypeFilter = searchParams.get("type");
   const displayVans = TypeFilter
@@ -47,6 +47,9 @@ function Vans() {
       }
       return prevValue;
     });
+  }
+  if (loading) {
+    return <div>Loading...</div>;
   }
   return (
     <div>

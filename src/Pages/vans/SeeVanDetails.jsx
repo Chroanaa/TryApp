@@ -68,8 +68,8 @@ function VanDetails() {
     backgroundColor: setTypeColor(),
   };
   let location = useLocation();
-  const prevSearch = location.state.search; //Gets the state of the search parameter from the previous page
-
+  const prevSearch = location.state?.search || ""; //assign the previous search query to the variable and checks if its undefined or not
+  const word = prevSearch.split("=")[1];
   return (
     <Suspense fallback={<h1>Loading...</h1>}>
       <div
@@ -82,7 +82,7 @@ function VanDetails() {
           className="flex flex-row underline decoration-white ml-12 max-w-[150px] transition-all hover:decoration-blue hover:scale-105 underline-offset-4 decoration-2 duration-500"
         >
           <FaArrowLeftLong className="self-center transition-all mr-2" />
-          Back to vans
+          Back to {prevSearch ? word : "All vans"}
         </NavLink>
         <div className="flex flex-col">
           <img
