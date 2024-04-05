@@ -21,11 +21,12 @@ import HostVansDetails from "./Pages/Host/VansDetails/SeeVanDetails.jsx";
 import Description from "./Pages/Host/VansDetails/Description.jsx";
 import Pricing from "./Pages/Host/VansDetails/Pricing.jsx";
 import Photos from "./Pages/Host/VansDetails/Photos.jsx";
-import ErrorPage from "./Pages/ErrorPage.jsx";
+import NotFoundPage from "./components/NotFoundPage.jsx";
+import Error from "./components/Error.jsx";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<Layout />} errorElement={<Error />}>
         <Route index element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/vans" element={<Vans />} loader={vansLoader} />
@@ -48,7 +49,7 @@ function App() {
             <Route path="photos" element={<Photos />} />
           </Route>
         </Route>
-        <Route path="*" element={<ErrorPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     )
   );

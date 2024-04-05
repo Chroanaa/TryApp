@@ -1,11 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import LoginModal from "./LoginModal";
 function Header() {
   const currentLink = ({ isActive }) => {
     return {
       color: isActive ? "red" : "",
     };
   };
+  const [modalShow, setModalShow] = React.useState(false);
+  console.log(modalShow);
   return (
     <header>
       <nav className="flex flex-row justify-between bg-main p-4 ">
@@ -37,6 +40,13 @@ function Header() {
           >
             Vans
           </NavLink>
+          <button onClick={() => setModalShow(!modalShow)}>login</button>
+          {modalShow && (
+            <LoginModal
+              isShow={modalShow}
+              showToggle={() => setModalShow(!modalShow)}
+            />
+          )}
         </div>
       </nav>
     </header>

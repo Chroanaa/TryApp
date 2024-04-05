@@ -8,7 +8,6 @@ function Home() {
       <section>
         <div className="flex justify-center relative">
           <img src={HomeImage} alt="" className="w-full h-mainPageSize " />
-          <div className="absolute inset-0 bg-black opacity-50"></div>
         </div>
         <div className="absolute left-32 top-44 text-primary text-veryLarge font-bold m-5 ">
           You got the travel plans, we got the travel vans.

@@ -2,12 +2,10 @@ import React from "react";
 import { useEffect, useState, Suspense } from "react";
 
 import { useNavigate, useOutletContext } from "react-router-dom";
-const ListedVans = React.lazy(() =>
-  import("../../components/ui/HorizontalCard")
-);
+import ListedVans from "../../components/ui/HorizontalCard";
+("../../components/ui/HorizontalCard");
 
 function Dashboard() {
-  const abortFetchData = new AbortController();
   const [vans] = useOutletContext();
   const [limit, setLimit] = useState(3);
   console.log(vans);
