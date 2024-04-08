@@ -15,7 +15,7 @@ function ListedVans(props) {
             {editable && (
               <NavLink
                 to={`${props.id}`}
-                className="absolute left-[55rem] mt-5"
+                className="absolute left-[55rem] mt-5 z-[-1]"
               >
                 Edit
               </NavLink>

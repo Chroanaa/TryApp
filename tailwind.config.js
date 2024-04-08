@@ -10,6 +10,7 @@ export default {
       white: "rgba(255, 255, 255, 0)",
       blue: "blue",
       White: "#FFFFFF",
+      red: "#FF8C38",
     },
     fontFamily: {
       sans: ["Inter", "sans-serif"],
