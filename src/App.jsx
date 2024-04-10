@@ -34,7 +34,6 @@ function App() {
         <Route path="/vans" element={<Vans />} loader={vansLoader} />
         <Route path="/vans/:id" element={<VanDetails />} />
         <Route path="/login" element={<Login />} />
-
         <Route element={<Authenticator />}>
           <Route path="/host" element={<HostLayout />} loader={hostVansLoader}>
             <Route index element={<Dashboard />} />

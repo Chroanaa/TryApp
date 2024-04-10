@@ -10,7 +10,9 @@ export default {
       white: "rgba(255, 255, 255, 0)",
       blue: "blue",
       White: "#FFFFFF",
-      red: "#FF8C38",
+      red: "red",
+      green: "green",
+      darkgreen: "#115E59",
     },
     fontFamily: {
       sans: ["Inter", "sans-serif"],
@@ -24,6 +26,7 @@ export default {
     },
     height: {
       mainPageSize: "900px",
+      screen: "85vh",
     },
     fontWeight: {
       bold: 900,

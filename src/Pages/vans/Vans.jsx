@@ -45,8 +45,8 @@ function Vans() {
             </button>
             <button
               className={`bg-[#f9a754] text-primary px-4 py-2 rounded-lg ${
-                TypeFilter === "rugged" ? "bg-[#115E59]" : ""
-              }  transition-colors hover:bg-[#115E59] duration-500 `}
+                TypeFilter === "rugged" ? "bg-darkgreen" : ""
+              }  transition-colors hover:bg-darkgreen duration-500 `}
               onClick={() => handleFilter("type", "rugged")}
             >
               rugged
