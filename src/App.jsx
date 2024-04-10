@@ -23,6 +23,8 @@ import Pricing from "./Pages/Host/VansDetails/Pricing.jsx";
 import Photos from "./Pages/Host/VansDetails/Photos.jsx";
 import NotFoundPage from "./components/NotFoundPage.jsx";
 import Error from "./components/Error.jsx";
+import Login from "./components/Login.jsx";
+import Authenticator from "./components/Authenticator.jsx";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -31,22 +33,26 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/vans" element={<Vans />} loader={vansLoader} />
         <Route path="/vans/:id" element={<VanDetails />} />
-        <Route path="/host" element={<HostLayout />} loader={hostVansLoader}>
-          <Route index element={<Dashboard />} />
-          {/* this index property what it does is once the parent route (Host) is rendered it will render this child route first and always */}
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="income" element={<Income />} />
-          <Route path="vans" element={<HostVans />} />
-          <Route path="reviews" element={<Reviews />} />
-          <Route path="vans/:id" element={<HostVansDetails />}>
-            <Route index element={<Description />} />
-            <Route path="pricing" element={<Pricing />} />
-            <Route path="photos" element={<Photos />} />
-          </Route>
-          <Route path="dashboard/:id" element={<HostVansDetails />}>
-            <Route index element={<Description />} />
-            <Route path="pricing" element={<Pricing />} />
-            <Route path="photos" element={<Photos />} />
+        <Route path="/login" element={<Login />} />
+
+        <Route element={<Authenticator />}>
+          <Route path="/host" element={<HostLayout />} loader={hostVansLoader}>
+            <Route index element={<Dashboard />} />
+            {/* this index property what it does is once the parent route (Host) is rendered it will render this child route first and always */}
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="income" element={<Income />} />
+            <Route path="vans" element={<HostVans />} />
+            <Route path="reviews" element={<Reviews />} />
+            <Route path="vans/:id" element={<HostVansDetails />}>
+              <Route index element={<Description />} />
+              <Route path="pricing" element={<Pricing />} />
+              <Route path="photos" element={<Photos />} />
+            </Route>
+            <Route path="dashboard/:id" element={<HostVansDetails />}>
+              <Route index element={<Description />} />
+              <Route path="pricing" element={<Pricing />} />
+              <Route path="photos" element={<Photos />} />
+            </Route>
           </Route>
         </Route>
         <Route path="*" element={<NotFoundPage />} />

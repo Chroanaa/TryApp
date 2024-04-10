@@ -1,14 +1,13 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import LoginModal from "./LoginModal";
+import { NavLink, Navigate } from "react-router-dom";
+
 function Header() {
   const currentLink = ({ isActive }) => {
     return {
       color: isActive ? "red" : "",
     };
   };
-  const [modalShow, setModalShow] = React.useState(false);
-  console.log(modalShow);
+
   return (
     <header>
       <nav className="flex flex-row justify-between bg-main p-4 ">
@@ -20,7 +19,7 @@ function Header() {
 
         <div className="flex gap-10 m-4  ">
           <NavLink
-            to="/host"
+            to={"/host"}
             style={currentLink}
             className="underline decoration-white transition-colors duration-500 hover:decoration-blue underline-offset-4 decoration-2"
           >
@@ -40,13 +39,13 @@ function Header() {
           >
             Vans
           </NavLink>
-          <button onClick={() => setModalShow(!modalShow)}>login</button>
-          {modalShow && (
-            <LoginModal
-              isShow={modalShow}
-              showToggle={() => setModalShow(!modalShow)}
-            />
-          )}
+          <NavLink
+            to={"/login"}
+            style={currentLink}
+            className="underline decoration-white transition-colors duration-500 hover:decoration-blue underline-offset-4 decoration-2"
+          >
+            Login
+          </NavLink>
         </div>
       </nav>
     </header>
