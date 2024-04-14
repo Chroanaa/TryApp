@@ -25,6 +25,8 @@ import NotFoundPage from "./components/NotFoundPage.jsx";
 import Error from "./components/Error.jsx";
 import Login from "./components/Login.jsx";
 import Authenticator from "./components/Authenticator.jsx";
+import { Auth0Provider } from "@auth0/auth0-react";
+
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -58,7 +60,18 @@ function App() {
       </Route>
     )
   );
-  return <RouterProvider router={router} />;
+
+  return (
+    <Auth0Provider
+      domain="dev-thtobgzpznhhdpuc.us.auth0.com"
+      clientId="IASlCJRRMkhygLF50POqoa12qxuLnwle"
+      authorizationParams={{
+        redirect_uri: window.location.origin,
+      }}
+    >
+      <RouterProvider router={router} />
+    </Auth0Provider>
+  );
 }
 
 export default App;

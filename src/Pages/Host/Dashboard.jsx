@@ -4,7 +4,7 @@ import { useEffect, useState, Suspense } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import ListedVans from "../../components/ui/HorizontalCard";
 ("../../components/ui/HorizontalCard");
-
+import Profile from "../../components/Profile";
 function Dashboard() {
   const [vans] = useOutletContext();
   const [limit, setLimit] = useState(3);
@@ -13,6 +13,7 @@ function Dashboard() {
   let navigate = useNavigate();
   return (
     <div className="bg-[#ffead0] p-8">
+      <Profile />
       <div className="ml-36">
         <h1 className="text-large mb-5 font-bold">Welcome!</h1>
         <div className=" text-Gray">

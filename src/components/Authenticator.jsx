@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, redirect } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 function Authenticator() {
-  const isLoggedIn = false;
-  if (isLoggedIn) {
-    return <Outlet />;
-  } else return <Navigate to="/login" />;
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
+  if (!isAuthenticated) {
+    return loginWithRedirect();
+  }
+  return <Outlet />;
 }
 
 export default Authenticator;

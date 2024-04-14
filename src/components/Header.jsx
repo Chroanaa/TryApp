@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink, Navigate } from "react-router-dom";
-
+import LoginButton from "./ui/LoginButton";
+import Profile from "./Profile";
 function Header() {
   const currentLink = ({ isActive }) => {
     return {
@@ -39,13 +40,8 @@ function Header() {
           >
             Vans
           </NavLink>
-          <NavLink
-            to={"/login"}
-            style={currentLink}
-            className="underline decoration-white transition-colors duration-500 hover:decoration-blue underline-offset-4 decoration-2"
-          >
-            Login
-          </NavLink>
+          <LoginButton />
+          <Profile />
         </div>
       </nav>
     </header>

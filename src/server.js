@@ -85,5 +85,6 @@ let server = createServer({
       const id = request.params.id;
       return schema.vans.find(id);
     });
+    this.passthrough("https://dev-thtobgzpznhhdpuc.us.auth0.com/**");
   },
 });
