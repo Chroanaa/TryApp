@@ -1,14 +1,16 @@
 import React from "react";
 import { NavLink, Navigate } from "react-router-dom";
 import LoginButton from "./ui/LoginButton";
+import LogoutButton from "./ui/LogoutButton";
 import Profile from "./Profile";
+import { useAuth0 } from "@auth0/auth0-react";
 function Header() {
   const currentLink = ({ isActive }) => {
     return {
       color: isActive ? "red" : "",
     };
   };
-
+  const { isAuthenticated } = useAuth0();
   return (
     <header>
       <nav className="flex flex-row justify-between bg-main p-4 ">
@@ -40,7 +42,7 @@ function Header() {
           >
             Vans
           </NavLink>
-          <LoginButton />
+          {isAuthenticated ? <LogoutButton /> : <LoginButton />}
           <Profile />
         </div>
       </nav>

@@ -68,6 +68,9 @@ function App() {
       authorizationParams={{
         redirect_uri: window.location.origin,
       }}
+      //used to persist login state
+      useRefreshTokens={true}
+      cacheLocation="localstorage"
     >
       <RouterProvider router={router} />
     </Auth0Provider>

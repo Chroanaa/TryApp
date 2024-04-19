@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet, NavLink, useLoaderData } from "react-router-dom";
 import useFetchData from "../hooks/useFetchData";
+
 export function loader() {
   const data = useFetchData("/api/vans");
   return data;
