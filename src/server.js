@@ -1,8 +1,9 @@
-import { createServer, Model } from "miragejs";
+import { createServer, Model, Response } from "miragejs";
 
 let server = createServer({
   models: {
     vans: Model,
+    user: Model,
   },
 
   seeds(server) {
@@ -72,6 +73,11 @@ let server = createServer({
       type: "rugged",
       visibility: "public",
     });
+    server.create("user", {
+      id: "1",
+      username: "john",
+      password: "doe",
+    });
   },
 
   routes() {
@@ -84,6 +90,28 @@ let server = createServer({
     this.get("/vans/:id", (schema, request) => {
       const id = request.params.id;
       return schema.vans.find(id);
+    });
+
+    this.post("/login", (schema, request) => {
+      const { username, password } = JSON.parse(request.requestBody);
+      // ⚠️ This is an extremely naive version of authentication. Please don't
+      // do this in the real world, and never save raw text passwords
+      // in your database 😅
+      const foundUser = schema.users.findBy({ username, password });
+      if (!foundUser) {
+        return new Response(
+          401,
+          {},
+          { message: "No user with those credentials found!" }
+        );
+      }
+
+      // At the very least, don't send the password back to the client 😅
+      foundUser.password = undefined;
+      return {
+        user: foundUser,
+        token: "Enjoy your pizza, here's your tokens.",
+      };
     });
     this.passthrough("https://dev-thtobgzpznhhdpuc.us.auth0.com/**");
   },

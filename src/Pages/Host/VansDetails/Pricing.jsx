@@ -4,7 +4,11 @@ import useFetchData from "../../../hooks/useFetchData";
 function pricing() {
   const [vans] = useOutletContext();
 
-  return <div>${vans?.price}/day</div>;
+  return (
+    <div>
+      <p>${vans?.price}/day</p>
+    </div>
+  );
 }
 
 export default pricing;

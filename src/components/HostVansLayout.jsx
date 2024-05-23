@@ -23,32 +23,32 @@ function HostVansLayout() {
     };
   }, []);
   return (
-    <nav className="bg-White">
-      <div className="flex gap-10 bg-White rounded mb-5">
+    <nav className='bg-White'>
+      <div className='flex gap-10 bg-White rounded mb-5'>
         <NavLink
-          to="."
+          to='.'
           end
           style={currentLink}
-          className="underline decoration-white transition-colors duration-500 hover:decoration-blue underline-offset-4 decoration-2"
+          className='underline decoration-white transition-colors duration-500 hover:decoration-blue underline-offset-4 decoration-2'
         >
           Details
         </NavLink>
         <NavLink
-          to="pricing"
-          className="underline decoration-white transition-colors duration-500 hover:decoration-blue underline-offset-4 decoration-2"
+          to='pricing'
+          className='underline decoration-white transition-colors duration-500 hover:decoration-blue underline-offset-4 decoration-2'
           style={currentLink}
         >
           Pricing
         </NavLink>
         <NavLink
-          to="photos"
+          to='photos'
           style={currentLink}
-          className="underline decoration-white transition-colors duration-500 hover:decoration-blue underline-offset-4 decoration-2"
+          className='underline decoration-white transition-colors duration-500 hover:decoration-blue underline-offset-4 decoration-2'
         >
           Photos
         </NavLink>
       </div>
-      <Outlet context={[vans, setVans]} />
+      <Outlet context={[vans]} />
     </nav>
   );
 }

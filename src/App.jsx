@@ -30,47 +30,47 @@ import { Auth0Provider } from "@auth0/auth0-react";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Layout />} errorElement={<Error />}>
+      <Route path='/' element={<Layout />} errorElement={<Error />}>
         <Route index element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/vans" element={<Vans />} loader={vansLoader} />
-        <Route path="/vans/:id" element={<VanDetails />} />
-        <Route path="/login" element={<Login />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/vans' element={<Vans />} loader={vansLoader} />
+        <Route path='/vans/:id' element={<VanDetails />} />
+        <Route path='/login' element={<Login />} />
         <Route element={<Authenticator />}>
-          <Route path="/host" element={<HostLayout />} loader={hostVansLoader}>
+          <Route path='/host' element={<HostLayout />} loader={hostVansLoader}>
             <Route index element={<Dashboard />} />
             {/* this index property what it does is once the parent route (Host) is rendered it will render this child route first and always */}
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="income" element={<Income />} />
-            <Route path="vans" element={<HostVans />} />
-            <Route path="reviews" element={<Reviews />} />
-            <Route path="vans/:id" element={<HostVansDetails />}>
+            <Route path='dashboard' element={<Dashboard />} />
+            <Route path='income' element={<Income />} />
+            <Route path='vans' element={<HostVans />} />
+            <Route path='reviews' element={<Reviews />} />
+            <Route path='vans/:id' element={<HostVansDetails />}>
               <Route index element={<Description />} />
-              <Route path="pricing" element={<Pricing />} />
-              <Route path="photos" element={<Photos />} />
+              <Route path='pricing' element={<Pricing />} />
+              <Route path='photos' element={<Photos />} />
             </Route>
-            <Route path="dashboard/:id" element={<HostVansDetails />}>
+            <Route path='dashboard/:id' element={<HostVansDetails />}>
               <Route index element={<Description />} />
-              <Route path="pricing" element={<Pricing />} />
-              <Route path="photos" element={<Photos />} />
+              <Route path='pricing' element={<Pricing />} />
+              <Route path='photos' element={<Photos />} />
             </Route>
           </Route>
         </Route>
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path='*' element={<NotFoundPage />} />
       </Route>
     )
   );
 
   return (
     <Auth0Provider
-      domain="dev-thtobgzpznhhdpuc.us.auth0.com"
-      clientId="IASlCJRRMkhygLF50POqoa12qxuLnwle"
+      domain='dev-thtobgzpznhhdpuc.us.auth0.com'
+      clientId='IASlCJRRMkhygLF50POqoa12qxuLnwle'
       authorizationParams={{
         redirect_uri: window.location.origin,
       }}
       //used to persist login state
       useRefreshTokens={true}
-      cacheLocation="localstorage"
+      cacheLocation='localstorage'
     >
       <RouterProvider router={router} />
     </Auth0Provider>

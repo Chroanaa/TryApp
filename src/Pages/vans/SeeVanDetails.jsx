@@ -74,39 +74,39 @@ function VanDetails() {
     <Suspense fallback={<h1>Loading...</h1>}>
       <div
         aria-label={`Details of the ${vanDetails.name} with the price of ${vanDetails.price}`}
-        className="bg-main"
+        className='bg-main'
       >
         <NavLink
           to={`..?${prevSearch}`}
-          relative="path"
-          className="flex flex-row underline decoration-white ml-12 max-w-[150px] transition-all hover:decoration-blue hover:scale-105 underline-offset-4 decoration-2 duration-500"
+          relative='path'
+          className='flex flex-row underline decoration-white ml-12 max-w-[150px] transition-all hover:decoration-blue hover:scale-105 underline-offset-4 decoration-2 duration-500'
         >
-          <FaArrowLeftLong className="self-center transition-all mr-2" />
+          <FaArrowLeftLong className='self-center transition-all mr-2' />
           Back to {prevSearch ? word : "All vans"}
         </NavLink>
-        <div className="flex flex-col">
+        <div className='flex flex-col'>
           <img
             src={vanDetails.imageUrl}
             alt={`This is the image of ${vanDetails.name}`}
             width={700}
-            className=" mx-auto mt-5 mb-5"
+            className=' mx-auto mt-5 mb-5'
           />
-          <div className="flex flex-col ml-[37.5rem] gap-3">
+          <div className='flex flex-col ml-[37.5rem] gap-3'>
             <div
-              className="max-w-20 px-2 py-1 rounded text-[#FFCC8D] font-semiBold mt-5 mb-5"
+              className='max-w-20 px-2 py-1 rounded text-[#FFCC8D] font-semiBold mt-5 mb-5'
               style={styles}
             >
-              <p className="text-center">{vanDetails.type}</p>
+              <p className='text-center'>{vanDetails.type}</p>
             </div>
             <h1>{vanDetails.name}</h1>
 
             <h3>${vanDetails.price}/day</h3>
-            <div className="max-w-[45rem] mb-6">
+            <div className='max-w-[45rem] mb-6'>
               <p>{vanDetails.description}</p>
             </div>
             <NavLink
-              to="/vans"
-              className=" text-primary text-5xl text-center bg-orange w-[45rem] rounded-xl p-5 font-bold hover:bg-opacity-50"
+              to='/vans'
+              className=' text-primary text-5xl text-center bg-orange w-[45rem] rounded-xl p-5 font-bold hover:bg-opacity-50'
             >
               Rent this van
             </NavLink>
