@@ -5,11 +5,12 @@ export async function getUser(credentials) {
   });
   const data = await response.json();
   if (!response.ok) {
-    return {
-      body: data,
-      status: response.status,
+    throw {
+      message: data.message,
       statusText: response.statusText,
+      status: response.status,
     };
   }
+
   return data;
 }

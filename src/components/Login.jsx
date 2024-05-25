@@ -9,16 +9,19 @@ import {
 } from "react-router-dom";
 import { getUser } from "../utils/api";
 function Login() {
-  const [status, setStatus] = React.useState("idle");
-  if (localStorage.getItem("isLoggedIn")) {
-    return <Navigate to='/host' replace />;
-  }
   const location = useLocation();
+  const prevLocation = location.state?.prevUrl;
+  if (localStorage.getItem("isLoggedIn")) {
+    return <Navigate to={prevLocation} replace />;
+  }
+  const [status, setStatus] = React.useState("idle");
+  const [error, setError] = React.useState(null);
   const navigate = useNavigate();
   const [value, setValue] = React.useState({
     username: "",
     password: "",
   });
+  console.log(prevLocation);
   const handleChange = (event) => {
     const { name, value } = event.target;
     setValue((prev) => {
@@ -28,25 +31,34 @@ function Login() {
       };
     });
   };
-  const handleSubmit = async (e) => {
+  const validateUser = async () => {
+    try {
+      const response = await getUser(value);
+      navigate(prevLocation ? prevLocation : "/host", { replace: true });
+      localStorage.setItem("isLoggedIn", true);
+      window.location.reload();
+    } catch (error) {
+      setError(error.message.data.message);
+      setStatus("idle");
+    } finally {
+      setValue({
+        username: "",
+        password: "",
+      });
+      setStatus("idle");
+    }
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    document.getElementById("submitBtn").disabled = true;
     setStatus("loading");
     setTimeout(() => {
-      setStatus("idle");
-      document.getElementById("submitBtn").disabled = false;
+      validateUser();
     }, 2000);
-    validateUser();
   };
-  const validateUser = async () => {
-    const response = await getUser(value);
-    if (response.status === 401) {
-      navigate("/login", { state: { message: response.data.message } });
-      return;
-    }
-    localStorage.setItem("isLoggedIn", true);
-  };
-  const errorMessage = location.state?.message;
+
+  const authErrorMessage = location.state?.message;
+  const invalidCredentialsMessage = error;
   return (
     <div className='w-full flex justify-center bg-main h-screen'>
       <form
@@ -54,7 +66,10 @@ function Login() {
         className='flex flex-col gap-4 max-w-96 justify-center place-items-center'
         onSubmit={handleSubmit}
       >
-        {errorMessage && <p className='text-red'>{errorMessage}</p>}
+        {invalidCredentialsMessage && (
+          <p className='text-red'>{invalidCredentialsMessage}</p>
+        )}
+        {authErrorMessage && <p className='text-red'>{authErrorMessage}</p>}
         <h1 className='text-large rounded-xl p-5 bg-orange'>
           Login to you Account
         </h1>
@@ -67,6 +82,8 @@ function Login() {
             placeholder='Username'
             onChange={handleChange}
             value={value.username}
+            required
+            autoComplete='on'
           />
         </div>
         <div className='flex flex-col'>
@@ -78,6 +95,8 @@ function Login() {
             placeholder='Password'
             onChange={handleChange}
             value={value.password}
+            required
+            autoComplete='on'
           />
         </div>
         <div className='text-small'>

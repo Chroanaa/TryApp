@@ -99,7 +99,7 @@ let server = createServer({
       // in your database 😅
       const foundUser = schema.users.findBy({ username, password });
       if (!foundUser) {
-        return new Response(
+        throw new Response(
           401,
           {},
           { message: "No user with those credentials found!" }

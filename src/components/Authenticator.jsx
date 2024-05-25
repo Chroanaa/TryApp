@@ -4,11 +4,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 function Authenticator() {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const currentUrl = window.location.pathname;
   if (!isLoggedIn) {
     return (
       <Navigate
         to='/login'
-        state={{ message: "You need to login first" }}
+        state={{ message: "You need to login first", prevUrl: currentUrl }}
         replace
       />
     );
