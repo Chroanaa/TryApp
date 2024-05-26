@@ -21,7 +21,6 @@ function Login() {
     username: "",
     password: "",
   });
-  console.log(prevLocation);
   const handleChange = (event) => {
     const { name, value } = event.target;
     setValue((prev) => {

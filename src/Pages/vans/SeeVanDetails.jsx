@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { NavLink, useParams, useLocation } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
-
+import { getVan } from "../../utils/api";
 function VanDetails() {
   const param = useParams();
   const abortFetchData = new AbortController();
@@ -14,12 +14,8 @@ function VanDetails() {
     type: "",
   });
   async function fetchVanDetails() {
-    const response = await fetch(
-      `/api/vans/${param.id}`,
-      abortFetchData.signal
-    );
-    const data = await response.json();
-    const Details = data.vans;
+    const Details = await getVan(param.id);
+    console.log(Details);
     setVanDetails({
       id: Details.id,
       name: Details.name,
@@ -33,8 +29,6 @@ function VanDetails() {
   const cacheData = async () => {
     const response = await fetch(`/api/vans/${param.id}`);
     const data = await response.json();
-    const vanList = data.vans;
-    localStorage.setItem(`details${param.id}`, JSON.stringify(vanList));
   };
   const checkLocalStorage = () => {
     if (localStorage.getItem(`details${param.id}`)) {

@@ -114,5 +114,6 @@ let server = createServer({
       };
     });
     this.passthrough("https://dev-thtobgzpznhhdpuc.us.auth0.com/**");
+    this.passthrough("https://firestore.googleapis.com/**");
   },
 });

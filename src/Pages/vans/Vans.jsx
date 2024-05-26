@@ -4,14 +4,16 @@ import useFetchData from "../../hooks/useFetchData";
 import useCacheData from "../../hooks/useCatchData";
 import useFetchCacheData from "../../hooks/useFetchCacheData";
 import { useLoaderData, useSearchParams } from "react-router-dom";
+import { getVans } from "../../utils/api";
 export async function loader() {
-  const data = useFetchData("/api/vans");
-  return data;
+  const vans = await getVans();
+  return { vans };
 }
 function Vans() {
   const abortFetchData = new AbortController(); // this is the controller that listen for the abort signal
-  const { vans } = useLoaderData();
+  const { vans } = useLoaderData(); // this is the data that was passed from the loader function
   const [searchParams, setSearchParams] = useSearchParams();
+
   const TypeFilter = searchParams.get("type"); // gets the current query parameter in the ur;
   const displayVans = TypeFilter
     ? vans.filter((van) => van.type === TypeFilter)
@@ -28,7 +30,7 @@ function Vans() {
       return prevValue;
     });
   }
-
+  console.log(vans);
   return (
     <div>
       <main className='bg-main p-10 '>
